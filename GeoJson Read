@@ -1,0 +1,7 @@
+install.packages("sf")
+install.packages("geojsonsf")
+
+library(geojsonsf)
+library(sf)
+wege <- geojsonsf::geojson_sf("Wege.geojson")
+print(wege)
