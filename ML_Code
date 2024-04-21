@@ -1,0 +1,25 @@
+import pandas as pd
+import sklearn
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+
+
+
+
+if __name__ == '__main__':
+
+    df = pd.read_csv("unfalle.csv", sep = ";")
+    core = ['UWOCHENTAG', 'USTUNDE', 'ULICHTVERH', 'USTRZUSTAND']
+    features = ['UWOCHENTAG', 'USTUNDE', 'ULICHTVERH', 'USTRZUSTAND']
+
+    X = df[features]
+    y=df['UKATEGORIE']
+    dtree = DecisionTreeClassifier()
+    dtree = dtree.fit(X, y)
+    tree.plot_tree(dtree, feature_names=features)
+    print(dtree.predict([[2, 8, 1, 2]]))
+    plt.show()
+    #print(dtree.predict([[x,x,x,x]])) - isert prediction  values
+
+
