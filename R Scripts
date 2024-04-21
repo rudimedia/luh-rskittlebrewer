@@ -1,1 +1,556 @@
+# ------------------------------------------------------------------------------
+# R-Skript
+# ------------------------------------------------------------------------------
+# Straßennahmen scrapen ----
+library(rvest)
+library(tidyverse)
+setwd("/Users/pepeweber/Desktop/R_Daten")
+
+street_function <- function(link){
+  tmp2 <- read_html(link)
+  tmp3 <- tmp2 %>% 
+    html_nodes(xpath = "//td[@align='left']") %>% 
+    html_text(trim = TRUE)
+  return(tmp3)
+}
+
+# Charlottenburg-Wilmesdorf 
+charlottenburg_1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b07_0.htm")
+charlottenburg_2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b07_1.htm")
+charlottenburg_3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b07_2.htm")
+charlottenburg_4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b07_3.htm")
+cw1<- street_function("https://berlingeschichte.de/strassen/_navi/n_b09_0.htm")
+cw2<- street_function("https://berlingeschichte.de/strassen/_navi/n_b09_1.htm")
+cw3<- street_function("https://berlingeschichte.de/strassen/_navi/n_b09_2.htm")
+cw4<- street_function("https://berlingeschichte.de/strassen/_navi/n_b09_3.htm")
+# Friedrichshain-Kreuzberg 
+fhain1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b05_0.htm")
+fhain2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b05_1.htm")
+fhain3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b05_2.htm")
+kreuzb1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b06_0.htm")
+kreuzb2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b06_1.htm")
+kreuzb3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b06_2.htm")
+# Lichtenberg
+hohenschoenhausen1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b22_0.htm")
+hohenschoenhausen2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b22_1.htm")
+hohenschoenhausen3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b22_2.htm")
+lichtenberg1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b17_0.htm")
+lichtenberg2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b17_1.htm")
+lichtenberg3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b17_2.htm")
+lichtenberg4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b17_3.htm")
+lichtenberg5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b17_4.htm")
+
+# Marzahn-Hellersdorf
+hellersdorf1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b23_0.htm")
+hellersdorf2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b23_1.htm")
+hellersdorf3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b23_2.htm")
+hellersdorf4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b23_3.htm")
+hellersdorf5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b23_4.htm")
+hellersdorf6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b23_5.htm")
+marzahn1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b21_0.htm")
+marzahn2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b21_1.htm")
+marzahn3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b21_2.htm")
+marzahn4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b21_3.htm")
+marzahn5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b21_4.htm")
+# Mitte
+mitte1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b01_0.htm")
+mitte2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b01_1.htm")
+mitte3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b01_2.htm")
+mitte4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b01_3.htm")
+mitte5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b01_4.htm")
+mitte6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b01_5.htm")
+mitte7 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b01_6.htm")
+mitte8 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b01_7.htm")
+tiergarten1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b02_0.htm")
+tiergarten2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b02_1.htm")
+tiergarten3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b02_2.htm")
+wedding1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b03_0.htm")
+wedding2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b03_1.htm")
+wedding3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b03_2.htm")
+#
+
+# Neukölln
+neukoeln1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b14_0.htm")
+neukoeln2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b14_1.htm")
+neukoeln3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b14_2.htm")
+neukoeln4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b14_3.htm")
+neukoeln5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b14_4.htm")
+neukoeln6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b14_5.htm")
+# Pankow
+pankow1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b19_0.htm")
+pankow2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b19_1.htm")
+pankow3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b19_2.htm")
+pankow4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b19_3.htm")
+pankow5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b19_4.htm")
+prenzberg1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b04_0.htm")
+prenzberg2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b04_1.htm")
+prenzberg3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b04_2.htm")
+weissensee1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b18_0.htm")
+weissensee2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b18_1.htm")
+weissensee3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b18_2.htm")
+weissensee4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b18_3.htm")
+# Reinickendorf
+reinickendorf1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b20_0.htm")
+reinickendorf2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b20_1.htm")
+reinickendorf3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b20_2.htm")
+reinickendorf4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b20_3.htm")
+reinickendorf5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b20_4.htm")
+reinickendorf6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b20_5.htm")
+reinickendorf7 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b20_6.htm")
+reinickendorf8 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b20_7.htm")
+reinickendorf9 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b20_8.htm")
+# Spandau 
+spandau1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_0.htm")
+spandau2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_1.htm")
+spandau3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_2.htm")
+spandau4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_3.htm")
+spandau5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_4.htm")
+spandau6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_5.htm")
+spandau7 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_6.htm")
+spandau8 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_7.htm")
+spandau9 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_8.htm")
+spandau10 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b08_9.htm")
+# Steglitz-Zehlendorf
+steglitz1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b12_0.htm")
+steglitz2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b12_1.htm")
+steglitz3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b12_2.htm")
+steglitz4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b12_3.htm")
+steglitz5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b12_4.htm")
+steglitz6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b12_5.htm")
+steglitz7 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b12_6.htm")
+steglitz8 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b12_7.htm")
+zehlendorf1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b10_0.htm")
+zehlendorf2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b10_1.htm")
+zehlendorf3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b10_2.htm")
+zehlendorf4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b10_3.htm")
+zehlendorf5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b10_4.htm")
+zehlendorf6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b10_5.htm")
+zehlendorf7 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b10_6.htm")
+
+# Tempelhof-Schöneberg 
+schoeneberg1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b11_0.htm")
+schoeneberg2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b11_1.htm")
+schoeneberg3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b11_2.htm")
+schoeneberg4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b11_3.htm")
+tempelhof1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b13_0.htm")
+tempelhof2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b13_1.htm")
+tempelhof3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b13_2.htm")
+tempelhof4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b13_3.htm")
+tempelhof5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b13_4.htm")
+tempelhof6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b13_5.htm")
+tempelhof7 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b13_6.htm")
+# Treptow-Köpenick 
+koepenick1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b16_0.htm")
+koepenick2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b16_1.htm")
+koepenick3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b16_2.htm")
+koepenick4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b16_3.htm")
+koepenick5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b16_4.htm")
+koepenick6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b16_5.htm")
+koepenick7 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b16_6.htm")
+koepenick8 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b16_7.htm")
+treptow1 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b15_0.htm")
+treptow2 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b15_1.htm")
+treptow3 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b15_2.htm")
+treptow4 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b15_3.htm")
+treptow5 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b15_4.htm")
+treptow6 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b15_5.htm")
+treptow7 <- street_function("https://berlingeschichte.de/strassen/_navi/n_b15_6.htm")
+
+
+
+
+
+
+
+charlottenburg_wilmersdorf <-  c(charlottenburg_1, charlottenburg_2, charlottenburg_2, charlottenburg_3,
+                                 cw1, cw2, cw3, cw4)
+friedrichshain_kreuzberg <-  c(fhain1, fhain2, fhain3, kreuzb1, kreuzb2, kreuzb3)
+lichtenberg <- c(lichtenberg1, lichtenberg2, lichtenberg3, lichtenberg4, lichtenberg5,
+                 hohenschoenhausen1, hohenschoenhausen2, hohenschoenhausen3)
+marzahn_hellersdorf <- c(marzahn1, marzahn2, marzahn3, marzahn4, marzahn5, 
+                         marzahn6, hellersdorf1, hellersdorf2, hellersdorf3, 
+                         hellersdorf4, hellersdorf5, hellersdorf6)
+mitte <- c(mitte1, mitte2, mitte3, mitte4, mitte5, mitte6, mitte7, mitte8,
+           tiergarten1, tiergarten2, tiergarten3, wedding1, wedding2, wedding3)
+neukoeln <- c(neukoeln1, neukoeln2, neukoeln3, neukoeln4, neukoeln5, neukoeln6)
+pankow <- c(pankow1, pankow2, pankow3, pankow4, pankow5, prenzberg1, prenzberg2, prenzberg3,
+            weissensee1, weissensee2, weissensee3, weissensee4)
+reinickendorf <- c(reinickendorf1, reinickendorf2, reinickendorf3, reinickendorf4,
+                   reinickendorf5, reinickendorf6, reinickendorf7, reinickendorf8, reinickendorf9)
+spandau <- c(spandau1, spandau2, spandau3, spandau4, spandau5, spandau6, spandau7, 
+             spandau8, spandau9, spandau10 )
+steglitz_zehlendorf <- c(steglitz1, steglitz2, steglitz3, steglitz4,
+                         steglitz5, steglitz6, steglitz7, steglitz8,
+                         zehlendorf1, zehlendorf2, zehlendorf3, zehlendorf4, 
+                         zehlendorf5, zehlendorf6, zehlendorf7)
+tempelhof_schoeneberg <- c(tempelhof1, tempelhof2, tempelhof3, tempelhof4, 
+                           tempelhof5, tempelhof6, tempelhof7, schoeneberg1, 
+                           schoeneberg2, schoeneberg3, schoeneberg4)
+treptow_koepenick <- c(treptow1, treptow2, treptow3, treptow4, treptow5, treptow6, treptow7,
+                       koepenick1, koepenick2, koepenick3, koepenick4, 
+                       koepenick5, koepenick6, koepenick7, koepenick8)
+class(treptow_koepenick)
+
+
+
+# Einzelne Vektoren zu einem Vektor kombinieren
+alle_Straßen <- c(charlottenburg_wilmersdorf, friedrichshain_kreuzberg,
+                  lichtenberg, marzahn_hellersdorf, mitte,
+                  neukoeln, pankow, reinickendorf, spandau, steglitz_zehlendorf,
+                  tempelhof_schoeneberg, treptow_koepenick)
+
+# Ein Vektor für die Bezirksnamen erstellen, der die Längen der ursprünglichen Vektoren widerspiegelt
+Bezirksname <- c(rep("charlottenburg_wilmersdorf", length(charlottenburg_wilmersdorf)),
+                 rep("friedrichshain_kreuzberg", length(friedrichshain_kreuzberg)),
+                 rep("lichtenberg", length(lichtenberg)),
+                 rep("marzahn_hellersdorf", length(marzahn_hellersdorf)),
+                 rep("mitte", length(mitte)),
+                 rep("neukoeln", length(neukoeln)),
+                 rep("pankow", length(pankow)),
+                 rep("reinickendorf", length(reinickendorf)),
+                 rep("spandau", length(spandau)),
+                 rep("steglitz_zehlendorf", length(steglitz_zehlendorf)),
+                 rep("tempelhof_schoeneberg", length(tempelhof_schoeneberg)),
+                 rep("treptow_koepenick", length(treptow_koepenick)))
+
+# DataFrame erstellen
+strassennamen_df <- data.frame(Bezirksname = Bezirksname, Straßenname = alle_Straßen)
+write.csv(strassennamen_df, file = "berlin_strassennamen.csv", row.names = FALSE)
+# Ergebnis anzeigen
+print(neuer_df)
+# Koordinaten visualisieren auf KArten ----
+# Pakete 
+install.packages("leaflet")
+library(leaflet)
+library(dplyr)
+library(tidyverse)
+unfall_data <- data.frame(
+  latitude = bike_df_new$LatitudeWGS84,
+  longitude = bike_df_new$LongitudeWGS84
+)
+
+# Erstelle eine Karte
+unfall_karte <- leaflet(data = unfall_data) %>%
+  addTiles() %>%
+  addMarkers(~longitude, ~latitude) 
+?addTiles
+# Zeige die Karte an
+unfall_karte
+
+
+?addMarkers
+
+
+
+
+
+# Koordinaten in einzelne Spalten 
+
+df <- as.data.frame(matrix(NA, ncol = dim(lanes_df$features.geometry$coordinates[[1]])[length(dim(lanes_df$features.geometry$coordinates[[1]]))], nrow = length(lanes_df$features.geometry$coordinates)))
+num_dims <- length(dim(lanes_df$features.geometry$coordinates[[1]]))
+
+# Anzahl der Koordinatenpunkte
+num_coords <- dim(lanes_df$features.geometry$coordinates[[1]])[num_dims]
+colnames(df) <- paste0("coord_", 1:num_coords)
+for (i in 1:length(lanes_df$features.geometry$coordinates)) {
+  for (j in 1:num_coords) {
+    df[i, j] <- lanes_df$features.geometry$coordinates[[i]][1, 2, j]
+  }
+}
+
+# Test Fahrradstrecke aufzeigen 
+unfall_data_test <- data.frame(
+  latitude = c(52.50505, 52.50504),
+  longitude = c(13.58199, 13.58237)
+)
+
+
+mymap <- leaflet() %>%
+  addMarkers(data = unfall_data_test, lng = ~longitude, lat = ~latitude) %>%
+  addCircles(data = unfall_data_test, lng = ~longitude, lat = ~latitude, radius = 10)
+mymap
+
+
+
+
+
+unfall_data_test2 <- data.frame(
+  latitude = c(52.5054, 52.5053),
+  longitude = c(13.57214, 13.57261
+  )
+)
+
+leaflet(data = unfall_data_test2) %>%
+  addTiles() %>%
+  addMarkers(~longitude, ~latitude) 
+
+
+
+unfall_data_test3 <- data.frame(
+  latitude = c(13.56179, 13.56214, 13.56277, 13.56277, 13.56333, 13.5639, 13.56421, 13.56456, 13.56522, 13.56522, 13.56533, 13.56565, 13.56573, 13.56535, 13.56536, 13.56536, 13.56535, 13.56529),
+  longitude = c(52.50846, 52.50836, 52.50814, 52.50814,52.50793, 52.50771, 52.50761, 52.50749, 52.50728, 52.50728, 52.50724, 52.50717, 52.50714, 52.50724, 52.50721, 52.50719, 52.50716, 52.50711)
+)
+leaflet(unfall_data_test3) %>% 
+  addTiles() %>% 
+  addMarkers(~latitude, ~longitude)
+
+unfall_data_test3 <- data.frame(
+  latitude = c(13.56179, 13.56214, 13.56277, 13.56277),
+  longitude = c(52.50846, 52.50836, 52.50814, 52.50814)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 
+# 3D-Array mit den Koordinaten erstellen
+unfall_data_test_3d <- array(
+  c(13.58199, 13.58237, 52.50505, 52.50504),
+  dim = c(2, 2, 1)
+)
+
+# Koordinaten in Datenrahmen umwandeln
+unfall_data_df <- data.frame(
+  longitude = c(unfall_data_test[1, , 1]),
+  latitude = c(unfall_data_test[2, , 1])
+)
+
+# Karte erstellen und Punkte hinzufügen
+mymap <- leaflet(data = unfall_data_df) %>%
+  addTiles() %>%
+  addMarkers(~longitude, ~latitude)
+
+
+
+
+
+
+# Koordinaten unnest 
+koordinaten_df <- unnest(lanes_df, lanes_df$features.geometry$coordinates)
+# Vergleich Straßen Bikelanes ------
+library(tidyverse)
+accidents_2019 <- read.csv("Unfälle2019.csv", sep = ";")
+accidents_2019 %>% group_by(UWOCHENTAG) %>% summarise(n = n()) %>% 
+  mutate(anteil = n / nrow(accidents_2019))
+
+
+
+
+# Archiv ---
+View(accidents_2019)
+accidents_2019$STRASSE
+
+unfälle_straße_intersect <- intersect(accidents_2019$STRASSE, strassennamen_df$Straßenname)
+unfälle_straße
+
+accidents_2019 %>% group_by(STRASSE) %>% summarise(n = n()) %>%  arrange(desc(n))
+
+unfälle_straße_df <- accidents_2019 %>% 
+  mutate(unfall_passiert = ifelse(STRASSE %in% strassennamen_df$Bezirksname, 1, 0))
+View(unfälle_straße_df)
+
+
+
+accidents_2019 %>% left_join(strassennamen_df %>% select(Bezirksname), by = strassennamen_df$Straßenname)
+
+
+View(accidents_2019)
+# Bringing it all together -----
+install.packages("geojsonsf")
+library(geojsonsf)
+library(Hmisc)
+library(jsonlite)
+install.packages("Hmisc")
+accidents_21 <- read.csv("accidents_Berlin_2021.csv")
+esix <- read.csv("gssa_2022_bezirke.csv")
+lanesum <- read.csv("laneSum.csv")
+lanes_df <- geojson_sf("bike_lanes_Berlin.geojson") %>% as.data.frame() 
+
+{tmp1 <- accidents_21 %>% mutate(district_name = ifelse(District == 1, "Mitte", 
+                                                        ifelse(District == 2, "Friedrichshain-Kreuzberg",
+                                                               ifelse(District == 3, "Pankow",
+                                                                      ifelse(District == 4, "Charlottenburg-Wilmersdorf",
+                                                                             ifelse(District == 5, "Spandau",
+                                                                                    ifelse(District == 6, "Steglitz-Zehlendorf",
+                                                                                           ifelse(District == 7, "Tempelhof-Schöneberg",
+                                                                                                  ifelse(District == 8, "Neukölln",
+                                                                                                         ifelse(District == 9, "Treptow-Köpenick",
+                                                                                                                ifelse(District == 10, "Marzahn-Hellersdorf",
+                                                                                                                       ifelse(District == 11, "Lichtenberg",
+                                                                                                                              ifelse(District == 12, "Reinickendorf", 0)))))))))))))}
+
+
+esix1 <- esix %>% rename(
+  district_name = "bezNAME",
+  District = "bezID"
+)
+
+bezirks_cum <- tmp1 %>% group_by(district_name) %>% summarise(n = n()) %>% arrange(desc(n)) %>% as_tibble()
+new_df <- accidents_21 %>% left_join(esix1, by = "District")
+# ein datensatz mit index, unfälle und lanes, bezirks id und name 
+lanesum1 <- lanesum %>% rename(
+  district_name = "lanes.storage_name"
+)
+
+
+df_complete<- bezirks_cum |> 
+  left_join(lanesum1, join_by(district_name)) %>% 
+  left_join(esix1, join_by(district_name)) %>% 
+  left_join(lanes_df_n, join_by(district_name)) %>% 
+  select(district_name, n, lanes.length_in_m, District, ESIx_2022, anzahl_lanes )
+
+
+
+
+#' correlation_matrix
+#' Creates a publication-ready / formatted correlation matrix, using `Hmisc::rcorr` in the backend.
+#'
+#' @param df dataframe; containing numeric and/or logical columns to calculate correlations for
+#' @param type character; specifies the type of correlations to compute; gets passed to `Hmisc::rcorr`; options are `"pearson"` or `"spearman"`; defaults to `"pearson"`
+#' @param digits integer/double; number of decimals to show in the correlation matrix; gets passed to `formatC`; defaults to `3`
+#' @param decimal.mark character; which decimal.mark to use; gets passed to `formatC`; defaults to `.`
+#' @param use character; which part of the correlation matrix to display; options are `"all"`, `"upper"`, `"lower"`; defaults to `"all"`
+#' @param show_significance boolean; whether to add `*` to represent the significance levels for the correlations; defaults to `TRUE`
+#' @param replace_diagonal boolean; whether to replace the correlations on the diagonal; defaults to `FALSE`
+#' @param replacement character; what to replace the diagonal and/or upper/lower triangles with; defaults to `""` (empty string)
+#'
+#' @return a correlation matrix
+#' @export
+#'
+#' @examples
+#' `correlation_matrix(iris)`
+#' `correlation_matrix(mtcars)`
+correlation_matrix <- function(df, 
+                               type = "pearson",
+                               digits = 3, 
+                               decimal.mark = ".",
+                               use = "all", 
+                               show_significance = TRUE, 
+                               replace_diagonal = FALSE, 
+                               replacement = ""){
+  
+  # check arguments
+  stopifnot({
+    is.numeric(digits)
+    digits >= 0
+    use %in% c("all", "upper", "lower")
+    is.logical(replace_diagonal)
+    is.logical(show_significance)
+    is.character(replacement)
+  })
+  # we need the Hmisc package for this
+  require(Hmisc)
+  
+  # retain only numeric and boolean columns
+  isNumericOrBoolean = vapply(df, function(x) is.numeric(x) | is.logical(x), logical(1))
+  if (sum(!isNumericOrBoolean) > 0) {
+    cat('Dropping non-numeric/-boolean column(s):', paste(names(isNumericOrBoolean)[!isNumericOrBoolean], collapse = ', '), '\n\n')
+  }
+  df = df[isNumericOrBoolean]
+  
+  # transform input data frame to matrix
+  x <- as.matrix(df)
+  
+  # run correlation analysis using Hmisc package
+  correlation_matrix <- Hmisc::rcorr(x, type = )
+  R <- correlation_matrix$r # Matrix of correlation coeficients
+  p <- correlation_matrix$P # Matrix of p-value 
+  
+  # transform correlations to specific character format
+  Rformatted = formatC(R, format = 'f', digits = digits, decimal.mark = decimal.mark)
+  
+  # if there are any negative numbers, we want to put a space before the positives to align all
+  if (sum(R < 0) > 0) {
+    Rformatted = ifelse(R > 0, paste0(' ', Rformatted), Rformatted)
+  }
+  
+  # add significance levels if desired
+  if (show_significance) {
+    # define notions for significance levels; spacing is important.
+    stars <- ifelse(is.na(p), "   ", ifelse(p < .001, "***", ifelse(p < .01, "** ", ifelse(p < .05, "*  ", "   "))))
+    Rformatted = paste0(Rformatted, stars)
+  }
+  # build a new matrix that includes the formatted correlations and their significance stars
+  Rnew <- matrix(Rformatted, ncol = ncol(x))
+  rownames(Rnew) <- colnames(x)
+  colnames(Rnew) <- paste(colnames(x), "", sep =" ")
+  
+  # replace undesired values
+  if (use == 'upper') {
+    Rnew[lower.tri(Rnew, diag = replace_diagonal)] <- replacement
+  } else if (use == 'lower') {
+    Rnew[upper.tri(Rnew, diag = replace_diagonal)] <- replacement
+  } else if (replace_diagonal) {
+    diag(Rnew) <- replacement
+  }
+  
+  return(Rnew)
+}
+
+
+library(stargazer)
+stargazer(correlation_matrix(df_complete), title = "Correlation Matrix", style = "default",
+          out = "correlation_matrix_12.html")
+save_correlation_matrix = function(df, filename, ...) {
+  write.csv2(correlation_matrix(df, ...), file = filename)
+}
+save_correlation_matrix(df_complete, "correlation_matrix_1.html")
+fun_modell <- lm(lanes.length_in_m ~ ESIx_2022 + n, df_complete)
+
+stargazer(fun_modell, title = "Fun Modell", style = "default",
+          out = "fun_modell.html")
+
+
+
+
+
+lanes_df_n <- lanes_df %>%
+  select(-geometry) %>%
+  group_by(storage_name) %>%
+  summarise(anzahl_lanes = n()) %>% rename(
+    district_name = "storage_name"
+  )
+
+
+m1 <- glm(anzahl_lanes ~ ESIx_2022 + n, family = "poisson", df_complete)
+stargazer(m1, title = "Poisson-Modell", style = "default",
+          out = "possoin_modell.html")
+
+spass <- lm(District ~ n + anzahl_lanes, df_complete)
+summary(spass)
+
+# Abbildungen ----
+new_df_complete <- df_complete %>% rename(
+  District = "district_name",
+  accidents = "n",
+  lanes_length = "lanes.length_in_m",
+  district_number = "District",
+  SEI = "ESIx_2022",
+  n_lanes = "anzahl_lanes"
+)
+
+
+
+stargazer(correlation_matrix(new_df_complete), title = "Correlation Matrix", style = "default",
+          out = "abbildung_1.html")
+m1 <- glm(n_lanes ~ SEI + accidents, family = "poisson", new_df_complete)
+stargazer(m1, title = "Poisson-Modell", style = "default",
+          out = "abbildung_2.html")
+
+fun_modell <- lm(lanes_length ~ SEI + accidents, new_df_complete)
+
+stargazer(fun_modell, title = "Fun Modell", style = "default",
+          out = "abbildung_3.html")
 
